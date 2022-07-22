@@ -1,102 +1,181 @@
-<p align="left"><img src="https://cdn-images-1.medium.com/max/184/1*2GDcaeYIx_bQAZLxWM4PsQ@2x.png"></p>
-
-# __ih_datamadpt0522_project_m1__
-
-Ironhack Madrid - Data Analytics Part Time - May 2022 - Project Module 1
-
-## **Data:**
-
-There are 2 main datasources:
-
-- **MySQL Online Database.** The database contains information from the BiciMAD stations including their location (i.e.: latitude / longitude). In order to access the database you may need the following credentials:
-```
-Server:        SERVER_IP
-Database:      BiciMAD
-```
-> __IMPORTANT =>__ Username and password will be provided in class.
-
-
-- **API REST.** We will use the API REST from the [Portal de datos abiertos del Ayuntamiento de Madrid](https://datos.madrid.es/nuevoMadrid/swagger-ui-master-2.2.10/dist/index.html?url=/egobfiles/api.datos.madrid.es.json#/), where you can find the __Catálogo de datos__ with more than 70 datasets. The API endpoint is `https://datos.madrid.es/egob`. 
-
-> __IMPORTANT =>__ Specific datasets will be assigned to each student in order to perform the challenges.
-
-
----
-
-## **Main Challenge:**
-
-You must create a Python App (**Data Pipeline**) that allow their potential users to find the nearest BiciMAD station to a set of places of interest using the methods included in the module `geo_calculations.py`. The output table should look similar to:
-
-| Place of interest | Type of place (*) | Place address | BiciMAD station | Station location |
-|---------|----------|-------|------------|----------|
-| Auditorio Carmen Laforet (Ciudad Lineal)   | Centros Culturales | Calle Jazmin, 46 | Legazpi | Calle Bolívar, 3 |
-| Centro Comunitario Casino de la Reina | Centros municipales de enseñanzas artísticas | Calle Casino, 3 | Chamartin | Calle Rodríguez Jaén, 40 |
-| ...     | ...            | ...        | ...      | ...        |
-> __(*)__ There is a list of datasets each one with different places. A specific dataset will be assigned to each student. 
-
-
-**Your project must meet the following requirements:**
-
-- It must be contained in a GitHub repository which includes a README file that explains the aim and content of your code. You may follow the structure suggested [here](https://github.com/potacho/data-project-template).
-
-- It must create, at least, a `.csv` file including the requested table (i.e. Main Challenge). Alternatively, you may create an image, pdf, plot or any other output format that you may find convenient. You may also send your output by e-mail, upload it to a cloud repository, etc. 
-
-- It must provide, at least, two options for the final user to select when executing using `argparse`: **(1)** To get the table for every 'Place of interest' included in the dataset (or a set of them), **(2)** To get the table for a specific 'Place of interest' imputed by the user.
-
-**Additionally:**
-
-- You must prepare a 4 minutes presentation (ppt, canva, etc.) to explain your project (Instructors will provide further details about the content of the presentation).
-
-- The last slide of your presentation must include your candidate for the **'Ironhack Data Code Beauty Pageant'**. 
-
-
----
-
-### **Bonus 1:**
-
-You may include in your table the availability of bikes in each station.
-
----
-
-### **Bonus 2:**
-
-You may improve the usability of your app by using [FuzzyWuzzy](https://pypi.org/project/fuzzywuzzy/).
-
----
-
-### **Bonus 3:**
-
-Feel free to enrich your output data with any data you may find relevant (e.g.: wiki info for every place of interest) or connect to the BiciMAD API and update bikes availability realtime or find a better way to calculate distances...there's no limit!!!
-
---- 
-
-## **Project Main Stack**
-
-- [DBeaver](https://dbeaver.io/)
-
-- [SQL Alchemy](https://docs.sqlalchemy.org/en/13/intro.html)
-
-- [Requests](https://requests.readthedocs.io/)
-
-- [Pandas](https://pandas.pydata.org/pandas-docs/stable/reference/index.html)
-
-- Module `geo_calculations.py`
-
-- [Argparse](https://docs.python.org/3.7/library/argparse.html)
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
- 
-
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "13ee01c4",
+   "metadata": {},
+   "source": [
+    "# PROJECT 01 DATA README File\n",
+    "-----------------------------"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "ba2263a7",
+   "metadata": {},
+   "source": [
+    "\n",
+    "## Nombre\n",
+    "\n",
+    "Visita en bici\n",
+    " "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "2de0bd17",
+   "metadata": {},
+   "source": [
+    "---------------"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "46c85357",
+   "metadata": {},
+   "source": [
+    "## Status\n",
+    "\n",
+    "-------------------------------------\n",
+    "\n",
+    "Alpha, **Beta, 1.1**, Ironhack Data Analytics Final Project\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "f1163643",
+   "metadata": {},
+   "source": [
+    "## One-liner\n",
+    "-----------------\n",
+    "La aplicación se conecta a dos bases de datos. Por un lado a la API de la comunidad de Madrid para identificar todos los monumentos de la comunidad de Madrid y por otro lado a una base de datos de Mysql que contiene información sobre las estaciones de BiciMad para ofrecer los puntos de parada más cercanos a cada monumento de la ciudad. "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "42137077",
+   "metadata": {},
+   "source": [
+    "## Software y Librerías usadas:\n",
+    "\n",
+    "Para el desarrollo de esta aplicación se ha utilizado el lenguaje de programación [Python](https://www.python.org/downloads/) apoyado a su vez de las siguientes librerías.\n",
+    "\n",
+    "* [Sqlalchemy](https://www.sqlalchemy.org/).\n",
+    "* [Pandas](https://pandas.pydata.org/).\n",
+    "* [Requests](https://requests.readthedocs.io/en/latest/).\n",
+    "* [Numpy](https://numpy.org/).\n",
+    "* [Argparse](https://docs.python.org/3/library/argparse.html).\n",
+    "* [Shapely.geometry](https://pypi.org/project/Shapely/)\n",
+    "* [Geopandas](https://geopandas.org/en/stable/#:~:text=GeoPandas%20is%20an%20open%20source,access%20and%20matplotlib%20for%20plotting.)."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "9b18deba",
+   "metadata": {},
+   "source": [
+    "## Uso de la aplicación y configuración\n",
+    "Existen dos archivos diferentes:\n",
+    "* main.py\n",
+    "* secuencial.py\n",
+    "\n",
+    "> El archivo principal es **main.py**, el resto contiene una copia del código puramente secuencial sin ninguna función. Todas las funciones sobre las que se nutre **main.py** se encuentran en la carpeta de **modules**:\n",
+    "+ geo_calculations.py: contiene las funciones de mercator para el cálculo de dos puntos en función de sus coordenadas\n",
+    "+ macquisition.py: contiene las funciones para la conexión a la bbdd de Mysql y a la Api de la comunidad de Madrid. Para una mejor eficiencia de la aplicación, también contiene la conexión al csv principal con toda la información precargada.\n",
+    "+ mexportar.py: contiene una única función para almacenar el resultado en formato csv así como el listado precargado.\n",
+    "+ mmanipulaciondf.py: aquí se encuentran todas las operaciones de manipulación de df para seleccionar y limpiar los datos objetivo\n",
+    "+ moperacionaritmetica.py: la aplicación directa de mercator a todo el df\n",
+    "+ mreporting.py: contiene los resultados que se mostrarán al usuario.\n",
+    "\n",
+    "> Para arrancar la aplicación en nuestra terminal seguiremos los siguientes pasos:\n",
+    "1. Recomendable clonar el repositorio de GitHub en su local\n",
+    "2. A través del terminal dirigirse a la carpeta principal donde se encuentra el archivo **main.py**\n",
+    "3. Instalar tanto Python como todas las librerías mencionadas anteriormente\n",
+    "4. Ejecutar el archivo con el siguiente comando: `python main.py` seguido de `-f` e indicando una de estas dos funciones `one` (en el caso de querer indicar un punto de interés específico) o `all` (si se quiere el punto más cercano a cada punto de interés)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "9fdefb5d",
+   "metadata": {},
+   "source": [
+    "\n",
+    "---------------------\n",
+    "![alt text](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBrU3-8RkfLnAJrCEKDCJe3n0JO0B1DxC7zNKwlHH-AiTF2H1O6_xIkQeX498tLacqKl0&usqp=CAU)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "a06b7196",
+   "metadata": {},
+   "source": [
+    "```\n",
+    "└── project_m1\n",
+    "    ├── .gitignore\n",
+    "    ├── README.md\n",
+    "    ├── main.py\n",
+    "    ├── secuencial.py\n",
+    "    ├── notebooks\n",
+    "    │   ├── Main.ipynb\n",
+    "    │   ├── Test final.ipynb\n",
+    "    │   └── dev_notebook.ipynb\n",
+    "    ├── modules\n",
+    "    │   ├── geo_calculations.py\n",
+    "    │   ├── macquisition.py\n",
+    "    │   ├── mexportar.py\n",
+    "    │   ├── mmanipulaciondf.py\n",
+    "    │   ├── moperacionaritmetica.py\n",
+    "    │   └── mreporting.py\n",
+    "    └── datasets\n",
+    "        ├── bicimad_stations.csv\n",
+    "        ├── df.csv\n",
+    "        └── results\n",
+    "            \n",
+    "```"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "c8f23a43",
+   "metadata": {},
+   "source": [
+    "## Próximos pasos:\n",
+    "\n",
+    "En versiones futuras, el código está preparado para poder realizar la consulta no solo en base al punto de interés sino también \n",
+    "a una parada de BiciMad específica. Del mismo modo, se incluirá la posibilidad de poder indicar un número de estaciones cercanas a un punto de interés para dar más de una solución al usuario.\n",
+    "\n",
+    "Para versiones posteriores, se tiene previsto ofrecer una imagen visual de recorrido desde el punto de interés a la estación BiciMAD."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "0f36e848",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python [conda env:.conda-proyecto_01]",
+   "language": "python",
+   "name": "conda-env-.conda-proyecto_01-py"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.9.12"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}

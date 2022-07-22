@@ -10,7 +10,7 @@ def point_interest(df_fin, ask, num, path='./datasets/results/specific_point_of_
     df_poi = df_fin.loc[is_poi]
     df_poi = df_poi.reset_index(drop=True)
     csv_poi = df_poi.head(int(num)).to_csv(path, index=False)
-    return print(df_poi.head(int(num)))
+    return print('Se ha generado un archivo csv con la respuesta en la siguiente ruta ./datasets/results/ \n',  df_poi.head(int(num)))
 
 def all_monuments(df_fin, bics, path='./datasets/results/all_points_of_interests.csv', theme='Place of Interest'):
     # función que nos devuelve un listado de n resultados por cada theme indicado por el usuario

@@ -7,6 +7,8 @@ import numpy as np
 from shapely.geometry import Point
 import geopandas as gpd
 import argparse
+import warnings
+warnings.filterwarnings("ignore")
 
 from modules import macquisition as mac
 from modules import mmanipulaciondf as mma
